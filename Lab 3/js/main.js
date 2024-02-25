@@ -30,3 +30,20 @@ goToResourceButtons.forEach(button => {
         this.closest(".list-group-item-action").querySelector(".resource-text").classList.remove("fw-bold");
     });
 });
+
+
+
+//below is TASK 4 - DOES NOT FUNCTION PROPERLY
+
+
+
+// Assuming goToResourceButtons has already been declared
+goToResourceButtons = document.querySelectorAll(".go-to-resource-button");
+
+goToResourceButtons.forEach(button => {
+    button.addEventListener('click', function(e) {
+        e.preventDefault();
+        const resourceText = this.parentNode.querySelector(".resource-text");
+        resourceText.classList.add('fst-italic');
+    });
+});
