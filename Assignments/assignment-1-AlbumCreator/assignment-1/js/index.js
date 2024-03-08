@@ -6,12 +6,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // Get form input values
         const albumTitle = document.getElementById('album-title').value.trim();
         const albumDescription = document.getElementById('album-description').value.trim();
-        const albumArt = document.getElementById('album-art').value;
+        const albumArtSelect = document.getElementById('album-art');
+        const albumArt = albumArtSelect.options[albumArtSelect.selectedIndex].value;
 
         // Validate form inputs
         const isAlbumTitleValid = albumTitle.length > 0 && albumTitle.length <= 20;
         const isAlbumDescriptionValid = albumDescription.length > 0 && albumDescription.length <= 40;
-        const isAlbumArtValid = albumArt !== 'Select album art';
+        const isAlbumArtValid = albumArt !== '';
 
         // Clear previous validation errors
         clearValidationErrors();
@@ -61,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const cardHtml = `
             <div class="col">
                 <div class="card shadow-sm">
-                    <img class="card-img-top" src="assets/${art}" alt="Album Art"/>
+                    <img class="card-img-top" src="img/${art}" alt="Album Art"/>
                     <div class="card-body">
                         <h5 class="card-title">${title}</h5>
                         <p class="card-text">${description}</p>
