@@ -4,7 +4,7 @@ const AlbumDescription = document.querySelector('#album-description');
 const AlbumArt = document.querySelector('#album-art');
 const AlbumForm = document.querySelector('#album-form');
 
-//Event Listeners 
+//Event Listeners
 AlbumTitle.addEventListener('input', onHandleInputTitle);
 AlbumDescription.addEventListener('input', onHandleInputDescription);
 AlbumArt.addEventListener('change', onChangeSelectArt);
@@ -18,31 +18,43 @@ function onSubmitForm(e){
     const albumdescription = e.currentTarget.elements['album-description'].value;
     const albumart = e.currentTarget.elements['album-art'].value;
 
-    if (albumtitle === ''){
+    if (albumtitle.trim() === '' && albumdescription.trim() === ''){
         AlbumTitle.classList.add('is-invalid');
-    } 
-    if (albumtitle !== ''){
-        AlbumTitle.classList.remove('is-invalid');
-    }
-
-    if (albumdescription === ''){
         AlbumDescription.classList.add('is-invalid');
-    }
-    if (albumdescription !== ''){
-        AlbumDescription.classList.remove('is-invalid');
+        alert("Album title and description cannot be empty");
+        return; // Stop execution if invalid
+    } else {
+        if (albumtitle.trim() === ''){
+            AlbumTitle.classList.add('is-invalid');
+            alert("Album title cannot be empty");
+            return; // Stop execution if invalid
+        } else {
+            AlbumTitle.classList.remove('is-invalid');
+        }
+
+        if (albumdescription.trim() === ''){
+            AlbumDescription.classList.add('is-invalid');
+            alert("Album description cannot be empty");
+            return; // Stop execution if invalid
+        } else {
+            AlbumDescription.classList.remove('is-invalid');
+        }
     }
 
-    if (albumart === ''){
+    if (albumart.trim() === ''){
         AlbumArt.classList.add('is-invalid');
-    } 
-    if(albumart !== ''){
+        alert("Album art cannot be empty");
+        return; // Stop execution if invalid
+    } else {
         AlbumArt.classList.remove('is-invalid');
-        renderAlbumcard(albumtitle, albumdescription, albumart);
-        e.currentTarget.reset();
     }
+
+    // If all fields are valid, render the album card and reset the form
+    renderAlbumcard(albumtitle, albumdescription, albumart);
+    e.currentTarget.reset();
 }
 
-//Validation Errors-Album title 
+//Validation Errors-Album title
 function onHandleInputTitle(e){
     const onHandleInputTitle = e.currentTarget.value;
 
